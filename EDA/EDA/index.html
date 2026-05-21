@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Product Catalog EDA & Visualizations Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside>
+        <div class="logo-container">
+            <div class="logo-icon">✦</div>
+            <div class="logo-text">Aura Analytics</div>
+        </div>
+        
+        <div class="sidebar-label">Datasets Available</div>
+        <ul class="dataset-list" id="dataset-selector-list">
+            <li>
+                <button class="dataset-btn active" id="btn-electronics" onclick="switchDataset('Electronics')">
+                    <span>Electronics</span>
+                    <span class="btn-indicator"></span>
+                </button>
+            </li>
+            <li>
+                <button class="dataset-btn" id="btn-grocery" onclick="switchDataset('Grocery_and_Gourmet_Food')">
+                    <span>Grocery & Food</span>
+                    <span class="btn-indicator"></span>
+                </button>
+            </li>
+            <li>
+                <button class="dataset-btn" id="btn-household" onclick="switchDataset('Health_Household')">
+                    <span>Health & Household</span>
+                    <span class="btn-indicator"></span>
+                </button>
+            </li>
+            <li>
+                <button class="dataset-btn" id="btn-personal" onclick="switchDataset('Health_and_Personal_Care')">
+                    <span>Personal Care</span>
+                    <span class="btn-indicator"></span>
+                </button>
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <p><strong>Studio-Based Project</strong></p>
+            <p>Exploratory Data Analysis</p>
+            <p>Version 1.0.0</p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- Header -->
+        <header>
+            <div class="header-title-sec">
+                <h1 id="main-title">Electronics Catalog EDA</h1>
+                <p id="main-subtitle">Detailed insights and statistical distributions of the dataset</p>
+            </div>
+        </header>
+
+        <!-- KPI Grid -->
+        <section class="kpi-row" id="kpi-section">
+            <!-- KPI 1: Size -->
+            <div class="glass-card kpi-card animate-fade animate-delay-1" id="kpi-total-records">
+                <div class="kpi-header">
+                    <span>Catalog Size</span>
+                    <span class="kpi-icon">📊</span>
+                </div>
+                <div>
+                    <div class="kpi-value" id="val-total-rows">0</div>
+                    <div class="kpi-sub" id="sub-analyzed-rows">Analyzed: 0</div>
+                </div>
+            </div>
+
+            <!-- KPI 2: Avg Rating -->
+            <div class="glass-card kpi-card animate-fade animate-delay-2" id="kpi-avg-rating">
+                <div class="kpi-header">
+                    <span>Average Rating</span>
+                    <span class="kpi-icon">★</span>
+                </div>
+                <div>
+                    <div class="kpi-value" id="val-avg-rating">0.00</div>
+                    <div class="kpi-sub" id="sub-rating-std">Std Dev: 0.00</div>
+                </div>
+            </div>
+
+            <!-- KPI 3: Price -->
+            <div class="glass-card kpi-card animate-fade animate-delay-3" id="kpi-median-price">
+                <div class="kpi-header">
+                    <span>Median Price</span>
+                    <span class="kpi-icon">💵</span>
+                </div>
+                <div>
+                    <div class="kpi-value" id="val-median-price">$0.00</div>
+                    <div class="kpi-sub" id="sub-price-available">Populated: 0%</div>
+                </div>
+            </div>
+
+            <!-- KPI 4: Completeness -->
+            <div class="glass-card kpi-card animate-fade" id="kpi-data-completeness">
+                <div class="kpi-header">
+                    <span>Overall Completeness</span>
+                    <span class="kpi-icon">🛡️</span>
+                </div>
+                <div>
+                    <div class="kpi-value" id="val-completeness">0%</div>
+                    <div class="kpi-sub">Mean feature fill rate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualization Carousel -->
+        <section class="viz-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-indicator"></span>
+                    <span>Suited Data Visualizations</span>
+                </div>
+            </div>
+            
+            <div class="glass-card carousel-container animate-fade animate-delay-1" id="viz-carousel-wrapper">
+                <!-- Left panel: Visual image with navigation buttons -->
+                <div class="carousel-view">
+                    <button class="carousel-nav-btn prev" onclick="navigateCarousel(-1)" id="btn-prev-slide">‹</button>
+                    <img src="" alt="Data Visualization Chart" id="carousel-img">
+                    <button class="carousel-nav-btn next" onclick="navigateCarousel(1)" id="btn-next-slide">›</button>
+                </div>
+                
+                <!-- Right panel: Metadata, Rationale, and Insights -->
+                <div class="carousel-details">
+                    <div>
+                        <div class="graph-num-label" id="slide-number">Visualization 1 of 7</div>
+                        <h2 class="graph-title" id="slide-title">Rating Distribution Analysis</h2>
+                        <p class="graph-desc" id="slide-desc">This graph displays the frequency of product ratings, allowing us to see skewness and density patterns in the catalog.</p>
+                    </div>
+                    
+                    <div class="graph-suitability-box">
+                        <div class="suitability-title">Why this graph is suited</div>
+                        <div class="suitability-desc" id="slide-suitability">Amazon/E-commerce ratings are heavily biased towards higher scores. A polished bar chart and density estimate show this distribution clearly.</div>
+                    </div>
+                    
+                    <div class="carousel-dots" id="carousel-dots-list">
+                        <!-- Dots populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis & Profiles Grid -->
+        <section class="analysis-grid">
+            <!-- Insights Panel -->
+            <div class="glass-card insights-card animate-fade animate-delay-2" id="insights-panel">
+                <div class="section-title" style="margin-bottom: 16px;">
+                    <span class="section-indicator" style="height: 20px;"></span>
+                    <span>Exploratory Insights</span>
+                </div>
+                
+                <ul class="insights-list" id="insights-list-items">
+                    <!-- Insights dynamically populated -->
+                </ul>
+            </div>
+
+            <!-- Schema Completeness Panel -->
+            <div class="glass-card schema-card animate-fade animate-delay-3" id="schema-completeness-panel">
+                <div class="section-title" style="margin-bottom: 16px;">
+                    <span class="section-indicator" style="height: 20px;"></span>
+                    <span>Feature Population Rate</span>
+                </div>
+                
+                <table class="completeness-table">
+                    <thead>
+                        <tr>
+                            <th>Feature Name</th>
+                            <th>Completeness Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schema-completeness-table-body">
+                        <!-- Populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- LOAD MAIN SCRIPTS -->
+    <script src="app.js"></script>
+</body>
+</html>
