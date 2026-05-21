@@ -1,0 +1,10 @@
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+pandas==2.2.3
+pyarrow==18.0.0
+numpy==2.1.3
+google-cloud-storage==2.18.2
+gcsfs==2024.10.0
+python-dotenv==1.0.1
+pydantic==2.9.2
+python-multipart==0.0.17
