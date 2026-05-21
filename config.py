@@ -35,7 +35,7 @@ MIN_CONFIDENCE_DATA_POINTS = 3
 # API settings
 API_HOST = os.getenv("API_HOST", "0.0.0.0")
 API_PORT = int(os.getenv("API_PORT", "8000"))
-CORS_ORIGINS = ["http://localhost:3000", "http://localhost:3001"]
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
 
 # Auth (hardcoded demo user)
 DEMO_USERNAME = os.getenv("DEMO_USERNAME", "admin")
